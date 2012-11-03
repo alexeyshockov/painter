@@ -1,0 +1,19 @@
+{
+    "require": {
+        "php": ">=5.4.0",
+
+        "silex/silex":   "1.0.*",
+        "pimple/pimple": ">=1.0.0, <1.0.x-dev",
+
+        "symfony/event-dispatcher": ">=2.1.0, <2.1.x-dev",
+        "symfony/http-foundation":  ">=2.1.0, <2.1.x-dev",
+        "symfony/http-kernel":      ">=2.1.0, <2.1.x-dev",
+        "symfony/routing":          ">=2.1.0, <2.1.x-dev",
+
+        "imagine/imagine": ">=0.3.0, <dev-master"
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-0": { "": "src/" }
+    }
+}
