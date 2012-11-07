@@ -1,0 +1,7 @@
+Package: painter
+Version: @version@
+Architecture: all
+Depends: nginx (>= 1.0.0), php5-apc (>= 5.4.0), php5-fpm (>= 5.4.0)
+Recommends: php5-suhosin
+Maintainer: Alexey Shockov <alexey@shockov.com>
+Description: image processor HTTP proxy
