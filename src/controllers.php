@@ -19,7 +19,8 @@ $app->error(function (\Exception $e, $code) use ($app) {
 // TODO Memory limit check?..
 $app->get('{url}', function(Request $request) use ($app) {
     $scheme = $request->headers->get('X-Painter-Scheme', 'http');
-    $host   = $request->headers->get('X-Painter-Host', '127.0.0.1');
+    $ip     = $request->headers->get('X-Painter-IP', '127.0.0.1');
+    $host   = $request->headers->get('X-Painter-Host', null);
     $uri    = $request->getRequestUri();
 
     $proxyHeaders = [];
@@ -45,8 +46,12 @@ $app->get('{url}', function(Request $request) use ($app) {
         }
     }
 
+    if ($host) {
+        $proxyHeaders[] = 'Host: '.$host;
+    }
+
     /** @var \Buzz\Message\Response */
-    $proxyResponse = $app['buzz.browser']->get($scheme.'://'.$host.$uri, $proxyHeaders);
+    $proxyResponse = $app['buzz.browser']->get($scheme.'://'.$ip.$uri, $proxyHeaders);
 
     if ($proxyResponse->getStatusCode() == 200) {
         // TODO Check content type...
