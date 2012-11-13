@@ -65,7 +65,7 @@ $app->get('{url}', function(Request $request) use ($app) {
 
         $processedImage = $app['imagine']->load($image)->thumbnail($size);
 
-        return new StreamedResponse(
+        $response = new StreamedResponse(
             function() use($processedImage) {
                 $processedImage->show('jpeg');
             }
@@ -74,6 +74,14 @@ $app->get('{url}', function(Request $request) use ($app) {
         // TODO Log (access log).
 
         // TODO Headers.
-        return new Response($proxyResponse->getContent(), $proxyResponse->getStatusCode());
+        $response = new Response($proxyResponse->getContent(), $proxyResponse->getStatusCode());
     }
+
+    foreach ($proxyResponse->getHeaders() as $header) {
+        list($name, $value) = explode(': ', $header, 2);
+
+        $response->headers->set($name, $value, false);
+    }
+
+    return $response;
 })->assert('url', '.+');
