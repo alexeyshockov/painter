@@ -84,6 +84,10 @@ $app->get('{url}', function(Request $request) use ($app) {
 
     $headers = [];
     foreach ($proxyResponse->getHeaders() as $header) {
+        if (strpos($header, ':') === false) {
+            continue;
+        }
+
         list($name, $value) = explode(': ', $header, 2);
 
         if (in_array($name, [
