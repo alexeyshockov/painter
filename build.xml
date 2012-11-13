@@ -6,6 +6,7 @@
     <target name="install-deps" description="Install dependencies.">
         <exec executable="wget" failonerror="true">
             <arg value="-nc" />
+            <arg value="-q" />
             <arg value="http://getcomposer.org/composer.phar" />
         </exec>
         <exec executable="php" failonerror="true">
