@@ -87,7 +87,6 @@ $app->get('{url}', function(Request $request) use ($app) {
         list($name, $value) = explode(': ', $header, 2);
 
         if (in_array($name, [
-            'server',
             'date',
             'content-type',
             'connection'
@@ -103,6 +102,8 @@ $app->get('{url}', function(Request $request) use ($app) {
     }
 
     $response->headers->add($headers);
+
+    $response->headers->set('Via', 'Painter (github.com/alexeyshockov/painter)', false);
 
     return $response;
 })->assert('url', '.+');
