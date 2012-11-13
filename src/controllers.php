@@ -80,6 +80,15 @@ $app->get('{url}', function(Request $request) use ($app) {
     foreach ($proxyResponse->getHeaders() as $header) {
         list($name, $value) = explode(': ', $header, 2);
 
+        if (in_array($name, [
+            'server',
+            'date',
+            'content-type',
+            'connection'
+        ])) {
+            continue;
+        }
+
         $response->headers->set($name, $value, false);
     }
 
