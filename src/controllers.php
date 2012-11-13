@@ -23,7 +23,7 @@ $app->get('{url}', function(Request $request) use ($app) {
     $uri    = $request->getRequestUri();
 
     $proxyHeaders = [];
-    foreach ($request->headers->all() as $name => $value) {
+    foreach ($request->headers->all() as $name => $values) {
         if (in_array($name, [
             'host',
             'content-type',
@@ -40,8 +40,9 @@ $app->get('{url}', function(Request $request) use ($app) {
             continue;
         }
 
-        // TODO Process more then one value...
-        $proxyHeaders[$name] = $value[0];
+        foreach ($values as $value) {
+            $proxyHeaders[] = $name.': '.$value;
+        }
     }
 
     /** @var \Buzz\Message\Response */
