@@ -48,7 +48,7 @@ $app->get('{url}', function(Request $request) use ($app) {
     /** @var \Buzz\Message\Response */
     $proxyResponse = $app['buzz.browser']->get($scheme.'://'.$host.$uri, $proxyHeaders);
 
-    if ($proxyResponse->getStatusCode() != 200) {
+    if ($proxyResponse->getStatusCode() == 200) {
         // TODO Check content type...
         $image = $proxyResponse->getContent();
 
