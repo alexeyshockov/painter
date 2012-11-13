@@ -9,7 +9,7 @@ $app->error(function (\Exception $e, $code) use ($app) {
         return;
     }
 
-    // TODO Log.
+    // TODO Log (error log).
 
     // TODO Process 415 (type exception)...
 
@@ -77,6 +77,7 @@ $app->get('{url}', function(Request $request) use ($app) {
         $response = new Response($proxyResponse->getContent(), $proxyResponse->getStatusCode());
     }
 
+    $headers = [];
     foreach ($proxyResponse->getHeaders() as $header) {
         list($name, $value) = explode(': ', $header, 2);
 
@@ -89,8 +90,14 @@ $app->get('{url}', function(Request $request) use ($app) {
             continue;
         }
 
-        $response->headers->set($name, $value, false);
+        if (isset($headers[$name])) {
+            $headers[$name][] = $value;
+        } else {
+            $headers[$name] = [$value];
+        }
     }
+
+    $response->headers->add($headers);
 
     return $response;
 })->assert('url', '.+');
