@@ -14,7 +14,15 @@
 
         "kriswallsmith/buzz": "v0.7"
     },
+    "require-dev": {
+        "symfony/browser-kit": ">=2.1.0, <2.1.x-dev",
+
+        "phpspec/phpspec2": "1.0.x-dev"
+    },
     "minimum-stability": "dev",
+    "config": {
+        "bin-dir": "bin"
+    },
     "autoload": {
         "psr-0": { "": "src/" }
     }
