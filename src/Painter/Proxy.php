@@ -74,18 +74,22 @@ class Proxy
             if (in_array($name, [
                 'host',
                 'connection',
+                // Authentication already in "Authorization" header.
                 'php-auth-user',
                 'php-auth-pw',
-                'accept'
             ])) {
                 continue;
             }
 
-            if (preg_match('/^x-painter/i', $name)) {
+            if (preg_match('/^x-proxy/i', $name)) {
                 continue;
             }
 
             foreach ($values as $value) {
+                if (empty($value)) {
+                    continue;
+                }
+
                 $proxyHeaders[] = $name.': '.$value;
             }
         }
