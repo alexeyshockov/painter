@@ -11,6 +11,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 $app = require __DIR__.'/../src/app.php';
 
+// From Application::run() with header decorator.
 $request  = Request::createFromGlobals();
 $response = $app->handle($request);
 
