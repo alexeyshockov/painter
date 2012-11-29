@@ -97,11 +97,9 @@ class Painter
         }
 
         // TODO Check Accept header (*/* or JPEG).
-        return new StreamedResponse(
-            function() use ($processedImage) {
-                $processedImage->show('jpeg');
-            }
-        );
+
+        // StreamedResponse set "Cache-Control: no-cache", fuck!
+        return new Response($processedImage->show('jpeg'));
     }
 
     /**
