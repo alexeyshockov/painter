@@ -131,12 +131,12 @@ class Painter
             $cropBox = null;
             if ($currentBox->getHeight() > $currentBox->getWidth()) {
                 // Portrait.
-                $point   = new Point(0, $currentBox->getHeight() - $currentBox->getWidth());
-                $cropBox = new Box($currentBox->getWidth(), $currentBox->getWidth());
+                $point   = new Point(0, 0);
             } else {
                 $point   = new Point(round(($currentBox->getWidth() - $currentBox->getHeight()) / 2), 0);
-                $cropBox = new Box($currentBox->getWidth(), $currentBox->getWidth());
             }
+
+            $cropBox = new Box($currentBox->getWidth(), $currentBox->getWidth());
 
             $image = $image->crop($point, $cropBox);
         }
