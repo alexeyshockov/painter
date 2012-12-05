@@ -114,7 +114,12 @@ class Painter
             throw new InvalidArgumentException('Unknown box.');
         }
 
-        return $image->thumbnail($params['box'], ImageInterface::THUMBNAIL_OUTBOUND);
+        // Don't enlarge items.
+        if ($params['box']->contains($image->getSize())) {
+            return $image;
+        }
+
+        return $image->thumbnail($params['box']);
     }
 
     /**
