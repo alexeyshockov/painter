@@ -67,6 +67,8 @@ class Painter extends ObjectBehavior
 
         $image->thumbnail(ANY_ARGUMENTS)->willReturn($image);
 
+        $image->get('jpeg')->willReturn("Data.");
+
         $this
             ->process($request, $proxyRequest, $proxyResponse)
             ->shouldHaveType('Symfony\Component\HttpFoundation\Response');
@@ -99,6 +101,8 @@ class Painter extends ObjectBehavior
 
         $image->crop(ANY_ARGUMENTS)->willReturn($image);
         $image->thumbnail(ANY_ARGUMENTS)->willReturn($image);
+
+        $image->get('jpeg')->willReturn("Data.");
 
         $this
             ->process($request, $proxyRequest, $proxyResponse)
