@@ -33,10 +33,11 @@ class PainterTest extends WebTestCase
         $client = $this->createClient();
 
         $client->request('GET', '/images/srpr/logo3w.png', array(), array(), array(
-            'HTTP_X_PROXY_HOST' => 'google.com',
+            'HTTP_X_PROXY_HOST' => 'www.google.com',
         ));
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame('image/png', $client->getResponse()->headers->get('Content-Type'));
+        $this->assertSame('max-age=691200, public', $client->getResponse()->headers->get('Cache-Control'));
     }
 }
